@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Miles Responsibility</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+	<!-- Bootstrap 
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />-->
+	<link type="text/css" rel="stylesheet" href="bootstrap.min.css" />	
+	<!-- Custom stlylesheet 
+	<link type="text/css" rel="stylesheet" href="css/style.css" />-->
+<link type="text/css" rel="stylesheet" href="style.css" />
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form">
+						<div class="form-header">
+							<h1>Miles Responsibility</h1>
+
+							<div style="width: 100%; display: table;">
+                                <div style="display: table-cell;">
+                                	<button class="submit-btn" onclick="document.getElementById('booking-form').style.display='block'; document.getElementById('showTicketTable').style.display='none'; 
+                                	document.getElementById('showFoundation_information').style.display='none';
+                                	document.getElementById('userName').style.display='none';
+        							document.getElementById('password').style.display='none';
+        							document.getElementById('check').style.display='none';
+                                	"  value="Flight Booking">Flight Booking</button>
+                                </div>
+                               
+                                <div style="display: table-cell;">
+                                <button style="display: table-cell;" class="submit-btn" onclick="showTickets();" value="Show Tickets">Show Tickets</button>
+                           		 </div>
+                               
+                                <div style="display: table-cell;">
+                                		 <button style="display: table-cell;" class="submit-btn" onclick="showFoundation_information();" value="Show Tickets">Foundation .</button>
+
+                                </div>
+                            </div>
+                            
+                            <div >
+                                 
+                            </div>
+
+
+						</div>
+
+						<div class="ticket-form" >
+                            		<table id="showTicketTable" style="color:white;" >
+                            		</table>
+                        		</div>
+
+                        <div class="ticket-form" >
+                            		<table id="showFoundation_information" style="color:white;" style="display: none;">
+                            		</table>
+                            	<div class="form-group">
+									<input class="form-control" type="text" id="userName" style="display: none;">
+									<span class="form-label">User Name</span>
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="text" id="password" style="display: none;">
+									<span class="form-label">Password</span>
+								</div>
+								<div class="form-btn">
+									<button  type ="button" id="check"class="submit-btn" onClick="login_check()" style="display: none;">Sign In</button>
+								</div>
+                        </div>
+                        		
+
+
+
+
+						<form id="booking-form">
+							<div class="form-group" >
+								<div class="form-checkbox">
+									<label for="roundtrip">
+										<!--<input type="radio" id="roundtrip" name="flight-type">
+										<span></span>Roundtrip-->
+									</label>
+									<label for="one-way">
+										<input type="radio" id="one-way" name="flight-type" checked>
+										<span></span>One way
+									</label>
+									<!--<label for="multi-city">
+										<input type="radio" id="multi-city" name="flight-type">
+										<span></span>Multi-City
+									</label> -->
+								</div>
+							</div>
+
+
+
+
+							<div class="form-group">
+								<!--
+								<input class="form-control" type="text" id="kalkis" onchange="muhtemel_ucuslar()" >
+								<span class="form-label">Flying from</span>-->
+								<input class="form-control" type="text" id="kalkis" list="departLocationList" autocomplete="off"autocapitalize="off" autocorrect="off" role="search" onchange="muhtemel_ucuslar_temizle();muhtemel_ucuslar();" required>
+								<datalist id="departLocationList">
+                			    </datalist>
+                				
+                				<span class="select-arrow"></span>
+								<span class="form-label">Flying from</span>
+
+							</div>
+							
+
+							<!--<div class="form-group">
+								<input class="form-control" type="text">
+								<span class="form-label">Flying to</span>-->
+
+								<div class="form-group">
+										<select class="form-control" id="inis">
+											<option></option>
+											
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Flying To</span>
+								</div>
+							<!-- </div>-->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="date" id="ucus_tarihi">
+										<span class="form-label">Check In</span>
+									</div>
+								</div>
+								<!--<div class="col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="date">
+										<span class="form-label">Check Out</span>
+									</div>
+								</div>-->
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<select class="form-control" id="sinif">
+											<option>Economy class</option>
+											<option>Business class</option>
+											
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Travel class</span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<select class="form-control" id="adults">
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Adults</span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<select class="form-control" id="yardim_kurulusu">
+											<option>Mehmetçik</option>
+											<option>Türk Eğitim</option>
+											<option>Akut</option>
+											<option>Lösev</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Foundation</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-btn">
+								<button  type ="button"class="submit-btn" onClick="bilet_al()">Check availability</button>
+							</div>
+							 
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="jquery.min.js"></script>
+	<script>
+		$('.form-control').each(function () {
+			floatedLabel($(this));
+		});
+
+		$('.form-control').on('input', function () {
+			floatedLabel($(this));
+		});
+
+		function floatedLabel(input) {
+			var $field = input.closest('.form-group');
+			if (input.val()) {
+				$field.addClass('input-not-empty');
+			} else {
+				$field.removeClass('input-not-empty');
+			}
+		}
+	</script>
+
+<script type="text/javascript">
+var a;
+var ucuslar =[]
+var ucus_map = new Map();
+var foundation_map = new Map();
+var departLocation = new Set();
+var alinan_biletler=[];
+foundation_map.set("Mehmetçik",["Mehmetçik",182912]);
+foundation_map.set("Türk Eğitim",["Türk Eğitim",2345]);
+foundation_map.set("Akut",["Akut",1938]);
+foundation_map.set("Lösev",["Lösev",2350]);
+var foundationAccounts_map=new Map();
+foundationAccounts_map.set( document.getElementById('yardim_kurulusu').options[0].text,["Mehmetçik","1"]);
+foundationAccounts_map.set( document.getElementById('yardim_kurulusu').options[1].text,["Türk Eğitim","2"]);
+foundationAccounts_map.set( document.getElementById('yardim_kurulusu').options[2].text,["Akut","3"]);
+foundationAccounts_map.set( document.getElementById('yardim_kurulusu').options[3].text,["Lösev","4"]);
+
+
+function bilet_al()
+{
+	
+
+
+    for(let i =0;i<ucus_map.get(kalkis.value).length;i++)
+    {
+    	if(ucus_map.get(kalkis.value)[i].nereye==inis.value)
+    	{    		
+			var bilet_adet=adults.value;
+			if (sinif.value=="Economy class") 
+			{
+				var ustSayi=1000;
+				var altSayi=2000;
+				var fiyat=Math.random();
+ 
+				fiyat=fiyat*(ustSayi-altSayi);
+				fiyat=Math.floor(fiyat)+altSayi;
+				fiyat=fiyat*adults.value;
+				
+			    ustSayi=500;
+				altSayi=1000;
+				var mil=Math.random();
+				mil=mil*(ustSayi-altSayi);
+				mil=Math.floor(mil)+altSayi;
+				mil=mil*bilet_adet;
+				
+				var kazanilanmil =(mil*3)/100;
+				
+				
+			}
+			else if(sinif.value=="Business class") 
+			{
+				 ustSayi=10000;
+				 altSayi=20000;
+				 fiyat=Math.random();
+ 
+				fiyat=fiyat*(ustSayi-altSayi);
+				fiyat=Math.floor(fiyat)+altSayi;
+				fiyat=fiyat*adults.value;
+				
+			    ustSayi=500;
+				altSayi=1000;
+				var mil=Math.random();
+				mil=mil*(ustSayi-altSayi);
+				mil=Math.floor(mil)+altSayi;
+				mil=mil*bilet_adet;
+				
+				var kazanilanmil =(mil*5)/100;
+			}
+
+
+			var u = new Ucuslar();
+			u.nereden=ucus_map.get(kalkis.value)[i].nereden;
+			u.nereye=ucus_map.get(kalkis.value)[i].nereye;
+    		u.sinif=sinif.value;
+    		u.tarih=ucus_tarihi.value;
+    		u.fiyat=fiyat;
+    		u.mil=mil;
+   			u.kazanilanmil=kazanilanmil;
+   			u.yardim=yardim_kurulusu.value;
+   			alinan_biletler.push(u);
+			/*console.log(ucus_map.get(kalkis.value)[i].nereden);
+			console.log(ucus_map.get(kalkis.value)[i].nereye);
+			console.log(ucus_tarihi.value);
+			console.log(fiyat);
+			console.log(mil);
+ 			console.log(kazanilanmil);*/
+ 		
+ 			for(let x of foundation_map){
+ 			console.log(x[0]);
+ 				
+			if (x[0]==yardim_kurulusu.value) {
+				x[1][1]=x[1][1]+kazanilanmil;
+
+				}
+			}
+
+
+    	}
+    	
+    }
+    
+
+}
+
+function showTickets(){
+        document.getElementById('booking-form').style.display="none"; 
+        document.getElementById('showFoundation_information').style.display='none';
+        document.getElementById('userName').style.display='none';
+        document.getElementById('password').style.display='none';
+       	document.getElementById('check').style.display='none';
+        document.getElementById('showTicketTable').style.display='block';
+       
+        
+        
+        var count=0;
+    	var $html="<tr><th>Price&emsp;</th><th>Date&emsp;</th><th>Travel Class&emsp;</th><th>From>>To&emsp;</th><th>Foundation&emsp;</th><th>earned mil&emsp;</th></tr>";
+    for(let x of alinan_biletler){
+        var item=x.fiyat+" - "+x.tarih+" - "+x.nereden+" - "+x.nereye+" - "+x.kazanilanmil;
+        console.log(item);
+        var printData=x.toString();
+		var $inputHtml="<tr><td>"+x.fiyat+"$&emsp;</td><td>"+x.tarih+"&emsp;</td><td>"+x.sinif+"&emsp;</td><td>"+x.nereden+"-"+x.nereye+"&emsp;</td><td>"+x.yardim+"&emsp;</td><th>"+x.kazanilanmil+"&emsp;</th></tr>";
+        $html += $inputHtml;
+    }   
+        if($html.length>11){
+        document.getElementById('showTicketTable').innerHTML=$html;
+        }
+        else{
+            document.getElementById('showTicketTable').innerHTML="nothing found"
+        }
+}
+
+function login_page()
+{
+
+		document.getElementById('booking-form').style.display="none";
+        document.getElementById('showTicketTable').style.display='none';
+       	document.getElementById('showFoundation_information').style.display='none';
+        document.getElementById('userName').style.display='block';
+        document.getElementById('password').style.display='block';
+        document.getElementById('check').style.display='block';
+}
+function login_check()
+{	
+	 
+	
+	let temp=false;
+	for(let x of foundationAccounts_map){
+		if (userName.value==x[0]&& password.value==x[1][1]) {
+        		console.log("doğru");
+        		temp=true;
+        		document.getElementById("userName").value=null;
+        		document.getElementById("password").value=null;
+        		break;
+        	}
+
+        else{
+        	console.log("yanlış");
+        	temp=false;
+        }
+	}
+	if (temp==false) {
+				alert("Login information is incorrect")
+        		document.getElementById("userName").value=null;
+        		document.getElementById("password").value=null;
+	}
+	else  
+	{		
+			//showFoundation_information()
+	}
+        	
+}
+
+		
+function showFoundation_information(){
+        document.getElementById('booking-form').style.display="none";
+        document.getElementById('showTicketTable').style.display='none';
+       	document.getElementById('showFoundation_information').style.display='block';
+        document.getElementById('userName').style.display='none';
+        document.getElementById('password').style.display='none';
+        document.getElementById('check').style.display='none';
+       
+       
+        
+    	var $html="<tr><th>Total Miles&emsp;</th></tr>";
+    for(let x of foundation_map){
+		var $inputHtml="<tr><td>"+x +"$&emsp;</td></tr>";
+        $html += $inputHtml;
+    }   
+        if($html.length>11){
+        document.getElementById('showFoundation_information').innerHTML=$html;
+        }
+        else{
+            document.getElementById('showFoundation_information').innerHTML="nothing found"
+        }
+}
+function muhtemel_ucuslar(){
+
+	for(let q=0;q<=document.getElementById("inis").length;q++)
+    {
+      	var x = document.getElementById("inis");
+		x.options.remove(q);
+    }
+
+	for(let v of ucus_map.values()){
+      if (v[0].nereden == kalkis.value)
+      {
+      		for(let i=0;i<v.length;i++)
+      		{
+      			var x = document.getElementById("inis");
+				var c = document.createElement("option");
+				c.text=v[i].nereye;
+        		x.options.add(c);
+      		}	
+      }
+    }
+}
+function muhtemel_ucuslar_temizle(){
+	document.getElementById('inis').innerHTML='';
+}
+
+function report(msg, id, list) {
+    // out.innerHTML += "<br>"; msg += " ";
+    // out.appendChild(document.createTextNode(msg));
+    // let n1;
+    // if (id) {
+    //     n1 = document.createElement("span");
+    //     n1.appendChild(document.createTextNode(id));
+    //     n1.classList.add("link");
+    //     out.appendChild(n1); msg += id;
+    //     //n1.addEventListener("click", doClick);
+    // }
+    // if (list) {
+    //     let n2 = document.createElement("span");
+    //     n2.appendChild(document.createTextNode(""));
+    //     n2.innerHTML += list.join("<br>");
+    //     n2.classList.add("course");
+    //     if (n1) n1.appendChild(n2);
+    // }
+    // console.log(msg);
+}
+
+
+const url = "https://raw.githubusercontent.com/HasanKagit/Odevler/master/";
+function readData(file) {
+    console.log("readData "+file);
+    fetch(url+file)
+          .then(r => r.text(), report)
+          .then(ogrenciEkle, report);
+
+}
+
+function parseStudent(line) {
+    let b = line.split("\t");
+    if(a!=b[0])
+    {
+    	ucuslar=[];
+    }
+    var u = new Ucuslar();
+    u.nereden=b[0];
+    u.nereye=b[1];
+    u.sinif=b[2];
+    u.tarih=b[3];
+    u.fiyat=b[4];
+    u.mil=b[5];
+    u.kazanilanmil=b[6];
+    ucuslar.push(u)
+   	a= b[0];
+    ucus_map.set(b[0],ucuslar);
+    departLocation.add(b[0]);
+    datalist();
+}
+function datalist(){
+
+	let arr=Array.from(departLocation);
+	var list='';
+        for(var i = 0; i < arr.length; i++)
+        list += '<option value="'+arr[i]+'"/>';
+     document.getElementById('departLocationList').innerHTML = list;
+
+}
+
+function ogrenciEkle(txt)
+{
+    let a = txt.split("\n");
+    for (let s of a) {
+     parseStudent(s);
+   
+    }
+   
+    // report(msg + keys.length+" students");
+}
+
+
+class Ucuslar {
+    constructor(nereden, nereye,sinif,tarih,fiyat,mil,kazanilanmil,yardim) {
+      this.nereden = nereden;
+      this.nereye = nereye;
+      this.sinif=sinif;
+      this.tarih=tarih;
+      this.fiyat=fiyat;
+      this.mil=mil;
+      this.kazanilanmil=kazanilanmil;
+    }
+    toString() {
+      return this.nereden;
+    }
+}
+
+class Foundation_infiormation {
+    constructor(totalMil) {
+      this.totalMil = totalMil;
+      
+    }
+
+    toString() {
+      return this.totalMil;
+    }
+}
+readData("a.txt");
+
+
+</script>
+
+
+
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
